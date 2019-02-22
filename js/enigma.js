@@ -18,18 +18,31 @@ $(document).ready(function (){
     }
 });
 
-$(document).keydown(function(e){
-    if (getKeyLetter(e) !== false) {
+let captureKeys = false;
+$(document).keydown(function (e) {
+    if (captureKeys && getKeyLetter(e) !== false) {
         changeKeyboardButtonHighlight(getButtonId(getKeyLetter(e)), true);
     }
 });
 
-$(document).keyup(function(e){
-    if (getKeyLetter(e) !== false) {
+$(document).keyup(function (e) {
+    if (captureKeys && getKeyLetter(e) !== false) {
         changeKeyboardButtonHighlight(getButtonId(getKeyLetter(e)), false);
         encodeLetter(getKeyLetter(e));
     }
 });
+
+function startEncoding() {
+    $("#startEncodingButton").css("display", "none");
+    $("#stopEncodingButton").css("display", "inline");
+    captureKeys = true;
+}
+
+function stopEncoding() {
+    $("#stopEncodingButton").css("display", "none");
+    $("#startEncodingButton").css("display", "inline");
+    captureKeys = false;
+}
 
 function resetMessage() {
     $("#message").val("");

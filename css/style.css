@@ -38,3 +38,7 @@ tr input {
     width: 50px;
     text-align: center;
 }
+
+#stopEncodingButton {
+    display: none;
+}
