@@ -5,6 +5,7 @@ body {
 #message {
     width: 100%;
     margin: 10px 0;
+    text-align: center;
 }
 
 .keyboard {
@@ -19,4 +20,21 @@ body {
     color: #ffffff;
     margin: 10px 15px;
     border-radius: 20px;
+}
+
+.cable-cross {
+    font-size: 12px;
+}
+
+table tr {
+    padding: 0;
+}
+
+tr {
+    text-align: center;
+}
+
+tr input {
+    width: 50px;
+    text-align: center;
 }

@@ -1,10 +1,34 @@
+$(document).ready(function (){
+    const inputIdPrefix = "#cross-";
+    for (let i = 0; i < keyCodes.length; i++) {
+        let inputId = inputIdPrefix + keyCodes[i]["letter"];
+        $(inputId).on("keyup", function(event) {
+            if ((event.keyCode >= 48 && event.keyCode <= 90) ||
+                (event.keyCode >= 96 && event.keyCode <= 111) ||
+                (event.keyCode >= 186)) {
+                autoFillCross(inputId);
+            }
+        });
+        $(inputId).on("keydown", function(event) {
+            if (event.keyCode === 8 || event.keyCode === 46) {
+                removePair(inputId);
+            }
+        });
+
+    }
+});
+
 $(document).keydown(function(e){
-    changeKeyboardButtonHighlight(getButtonId(getKeyLetter(e)), true);
+    if (getKeyLetter(e) !== false) {
+        changeKeyboardButtonHighlight(getButtonId(getKeyLetter(e)), true);
+    }
 });
 
 $(document).keyup(function(e){
-    changeKeyboardButtonHighlight(getButtonId(getKeyLetter(e)), false);
-    encodeLetter(getKeyLetter(e));
+    if (getKeyLetter(e) !== false) {
+        changeKeyboardButtonHighlight(getButtonId(getKeyLetter(e)), false);
+        encodeLetter(getKeyLetter(e));
+    }
 });
 
 function resetMessage() {
@@ -29,8 +53,10 @@ function changeKeyboardButtonHighlight(buttonId, highlighted) {
 function getKeyLetter(e) {
     const keyId = e.keyCode;
     const keyCodesRow = keyCodes.filter(k => k.keyCode === keyId);
-    const keyLetter = keyCodesRow[0]["letter"];
-    return keyLetter;
+    if (keyCodesRow === undefined) {
+        return false;
+    }
+    return keyCodesRow[0]["letter"];
 }
 
 function getButtonId(keyLetter) {
@@ -39,5 +65,7 @@ function getButtonId(keyLetter) {
 }
 
 function encodeLetter(keyLetter) {
-    addEncryptedLetter(keyLetter);
+    let currentLetter;
+    currentLetter = encodeLetterViaCross(keyLetter);
+    addEncryptedLetter(currentLetter);
 }
