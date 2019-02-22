@@ -12,14 +12,16 @@ $(document).keyup(function(e){
     const keyCodesRow = keyCodes.filter(k => k.keyCode === keyId);
     const keyLetter = keyCodesRow[0]["letter"];
     const buttonId = "#" + keyLetter;
-    const currentMessage = $("#message").val();
-    $("#message").val(currentMessage + keyLetter);
+    addEncryptedLetter(keyLetter);
     $(buttonId).css("background-color", "#5a6268");
     $(buttonId).css("color", "#ffffff");
-
-
 });
 
 function resetMessage() {
     $("#message").val("");
+}
+
+function addEncryptedLetter(letter) {
+    const currentMessage = $("#message").val();
+    $("#message").val(currentMessage + letter);
 }
