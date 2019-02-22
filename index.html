@@ -2,9 +2,61 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
+    <script src="js/jquery-3.3.1.min.js"></script>
+    <script src="js/enigma.js"></script>
+    <script src="js/keyCodes.js"></script>
     <title>Title</title>
 </head>
 <body>
-
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <input type="text" id="message" placeholder="Tutaj pojawi się zakodowana wiadomość"/>
+                <button class="btn btn-danger btn-block" id="resetButton" onclick="resetMessage()">Resetuj</button>
+            </div>
+        </div>
+        <div class="keyboard">
+            <div class="row first-row">
+                <div class="col-12">
+                    <button class="keyboard-key" id="q">Q</button>
+                    <button class="keyboard-key" id="w">W</button>
+                    <button class="keyboard-key" id="e">E</button>
+                    <button class="keyboard-key" id="r">R</button>
+                    <button class="keyboard-key" id="t">T</button>
+                    <button class="keyboard-key" id="y">Y</button>
+                    <button class="keyboard-key" id="u">U</button>
+                    <button class="keyboard-key" id="i">I</button>
+                    <button class="keyboard-key" id="o">O</button>
+                    <button class="keyboard-key" id="p">P</button>
+                </div>
+            </div>
+            <div class="row second-row">
+                <div class="col-12">
+                    <button class="keyboard-key" id="a">A</button>
+                    <button class="keyboard-key" id="s">S</button>
+                    <button class="keyboard-key" id="d">D</button>
+                    <button class="keyboard-key" id="f">F</button>
+                    <button class="keyboard-key" id="g">G</button>
+                    <button class="keyboard-key" id="h">H</button>
+                    <button class="keyboard-key" id="j">J</button>
+                    <button class="keyboard-key" id="k">K</button>
+                    <button class="keyboard-key" id="l">L</button>
+                </div>
+            </div>
+            <div class="row third-row">
+                <div class="col-12">
+                    <button class="keyboard-key" id="z">Z</button>
+                    <button class="keyboard-key" id="x">X</button>
+                    <button class="keyboard-key" id="c">C</button>
+                    <button class="keyboard-key" id="v">V</button>
+                    <button class="keyboard-key" id="b">B</button>
+                    <button class="keyboard-key" id="n">N</button>
+                    <button class="keyboard-key" id="m">M</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
