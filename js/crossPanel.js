@@ -44,6 +44,13 @@ function validateCross(inputId) {
         const newValue = $(inputId).val().toUpperCase();
         $(inputId).val(newValue);
     }
+    const tmp = inputId.split("#");
+    const preCrossedInputId = "#pre" + tmp[1];
+    if ($(preCrossedInputId).val() === $(inputId).val()) {
+        alert("Cannot make a pair with self");
+        $(inputId).val("");
+        return false;
+    }
     return true;
 }
 

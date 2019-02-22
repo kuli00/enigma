@@ -26,6 +26,10 @@ body {
     font-size: 12px;
 }
 
+table {
+    background-color: #f7f7f7;
+}
+
 table tr {
     padding: 0;
 }
