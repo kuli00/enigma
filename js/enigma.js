@@ -1,4 +1,5 @@
 $(document).ready(function (){
+    resetRotorsCounter();
     const inputIdPrefix = "#cross-";
     for (let i = 0; i < keyCodes.length; i++) {
         let inputId = inputIdPrefix + keyCodes[i]["letter"];
@@ -46,6 +47,7 @@ function stopEncoding() {
 
 function resetMessage() {
     $("#message").val("");
+    resetRotorsCounter();
 }
 
 function addEncryptedLetter(letter) {
@@ -80,5 +82,9 @@ function getButtonId(keyLetter) {
 function encodeLetter(keyLetter) {
     let currentLetter;
     currentLetter = encodeLetterViaCross(keyLetter);
+    for (let i = 0; i < rotors.length; i++) {
+        currentLetter = encodeViaRotor(i, currentLetter);
+    }
+    rotateRotors();
     addEncryptedLetter(currentLetter);
 }
