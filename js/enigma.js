@@ -1,6 +1,7 @@
 $(document).ready(function (){
     resetRotorsCounter();
     generateRotorsTableRows();
+    generateCodePattern();
     const inputIdPrefix = "#cross-";
     for (let i = 0; i < keyCodes.length; i++) {
         let inputId = inputIdPrefix + keyCodes[i]["letter"];
@@ -9,11 +10,13 @@ $(document).ready(function (){
                 (event.keyCode >= 96 && event.keyCode <= 111) ||
                 (event.keyCode >= 186)) {
                 autoFillCross(inputId);
+                generateCodePattern();
             }
         });
         $(inputId).on("keydown", function(event) {
             if (event.keyCode === 8 || event.keyCode === 46) {
                 removePair(inputId);
+                generateCodePattern();
             }
         });
 

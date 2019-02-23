@@ -65,4 +65,5 @@ function resetCross() {
 function removePair(inputId) {
     const removeInputId = "#cross-" + $(inputId).val();
     $(removeInputId).val("");
+    $(inputId).val("");
 }

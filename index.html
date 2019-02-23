@@ -9,6 +9,7 @@
     <script src="js/keyCodes.js"></script>
     <script src="js/crossPanel.js"></script>
     <script src="js/rotors.js"></script>
+    <script src="js/codePattern.js"></script>
     <title>Title</title>
 </head>
 <body>
@@ -195,21 +196,29 @@
                     </table>
                 </div>
                 <div class="col-6 rotors-options">
-                    <table class="table table-striped rotors-table">
-                        <thead>
-                        <tr>
-                            <th scope="col">Rotor Number</th>
-                            <th scope="col">Current values</th>
-                        </tr>
-                        <tr>
-                            <td>No rotor</td>
-                            <td>ABCDEFGHIJKLMNOPQRSTUVWXYZ</td>
-                        </tr>
-                        </thead>
-                        <tbody id="rotorsValues">
-
-                        </tbody>
-                    </table>
+                    <div class="row">
+                        <div class="col-12 rotors-options">
+                            <table class="table table-striped rotors-table">
+                                <thead>
+                                <tr>
+                                    <th scope="col">Rotor Number</th>
+                                    <th scope="col">Current values</th>
+                                </tr>
+                                <tr>
+                                    <td>No rotor</td>
+                                    <td>ABCDEFGHIJKLMNOPQRSTUVWXYZ</td>
+                                </tr>
+                                </thead>
+                                <tbody id="rotorsValues"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 code-patterns">
+                            <h4>Click on textarea to copy the coding pattern</h4>
+                            <textarea id="code-pattern" class="code-pattern" onclick="copyCodePattern()" readonly></textarea>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
