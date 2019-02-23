@@ -22,8 +22,12 @@ body {
     border-radius: 20px;
 }
 
-.cable-cross {
+.cable-cross{
     font-size: 12px;
+}
+
+.rotors-table {
+    font-family: "Courier New";
 }
 
 table {

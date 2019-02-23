@@ -16,10 +16,12 @@
         <div class="row">
             <div class="col-12">
                 <input type="text" id="message" placeholder="Here you will have encrypted message"/>
-                <button class="btn btn-primary" id="resetMessageButton" onclick="resetMessage()">Reset encrypted message</button>
-                <button class="btn btn-primary" id="resetCrossButton" onclick="resetCross()">Reset cross panel</button>
+                <button class="btn btn-warning" id="resetMessageButton" onclick="resetMessage()">Reset encrypted message</button>
+                <button class="btn btn-warning" id="resetCrossButton" onclick="resetCross()">Reset cross panel</button>
+                <button class="btn btn-warning" id="resetRotorsButton" onclick="resetRotors()">Reset rotors</button>
                 <button class="btn btn-success" id="startEncodingButton" onclick="startEncoding()">Start encoding</button>
                 <button class="btn btn-danger" id="stopEncodingButton" onclick="stopEncoding()">Stop encoding</button>
+
             </div>
         </div>
         <div class="keyboard">
@@ -189,6 +191,23 @@
                             <td><input class="cross-input" type="text" value="Z" id="precross-Z" disabled /></td>
                             <td><input class="cross-input" type="text" id="cross-Z"/></td>
                         </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-6 rotors-options">
+                    <table class="table table-striped rotors-table">
+                        <thead>
+                        <tr>
+                            <th scope="col">Rotor Number</th>
+                            <th scope="col">Current values</th>
+                        </tr>
+                        <tr>
+                            <td>No rotor</td>
+                            <td>ABCDEFGHIJKLMNOPQRSTUVWXYZ</td>
+                        </tr>
+                        </thead>
+                        <tbody id="rotorsValues">
+
                         </tbody>
                     </table>
                 </div>

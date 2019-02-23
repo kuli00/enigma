@@ -93,38 +93,21 @@ function encodeViaRotor(rotorId, letter) {
     return encodedLetter[0]["encodedLetter"];
 }
 
-function printRotorsFromArray(rotorId) {
-    for (let i = 0; i < 26; i++) {
-        var tmp = '{"precodedLetter" : "' + keyCodes[i]["letter"] + '", "encodedLetter" : "' + rotors[rotorId][i] + '"}, ';
-        console.log(tmp);
-    }
-}
-
-function printRotors(rotorId) {
-    for (let i = 0; i < 26; i++) {
-        var tmp = '{"precodedLetter" : "' + keyCodes[i]["letter"] +
-            '", "encodedLetter" : "' + rotors[rotorId][i]["encodedLetter"] +
-            '", "currentIndex" : ' + i + '}, ';
-        console.log(tmp);
-    }
-}
-
 function resetRotorsCounter() {
     for (let i = 0; i < rotorsCounter.length; i++) {
         rotorsCounter[i] = 0;
     }
+
 }
 
 function changeRotorsAssignment(rotorId) {
     let newRotor = rotors[rotorId];
-    console.log(newRotor);
     const tmp = newRotor[newRotor.length -1]["encodedLetter"];
     for (let i = newRotor.length - 1; i > 0; i--) {
         newRotor[i]["encodedLetter"] = newRotor[i-1]["encodedLetter"];
     }
     newRotor[0]["encodedLetter"] = tmp;
     rotors[rotorId] = newRotor;
-    console.log(newRotor);
 }
 
 function resetRotors() {
@@ -138,9 +121,58 @@ function rotateRotors() {
         if (rotorsCounter[i] >= keyCodes.length) {
             rotorsCounter[i+1]++;
             rotorsCounter[i] = 0;
-            if (i !== 0) {
-                changeRotorsAssignment(i);
+            if (i+1 < rotors.length) {
+                changeRotorsAssignment(i+1);
             }
         }
+    }
+}
+
+function generateRotorSequence(rotorId) {
+    let rotorString = "";
+    for (let i = 0; i < rotors[rotorId].length; i++) {
+        rotorString += rotors[rotorId][i]["encodedLetter"];
+    }
+    return rotorString;
+}
+
+function generateRotorsTableRows() {
+    for (let i = 0; i < rotors.length; i++) {
+        var headCell = document.createElement("TD");
+        headCell.id = "rotor-head-cell-" + i;
+        headCell.innerText = "Rotor #" + i;
+
+        var sequenceCell = document.createElement("TD");
+        sequenceCell.id = "rotor-sequence-cell-" + i;
+        sequenceCell.innerText = generateRotorSequence(i);
+
+        var newRow = document.createElement("TR");
+        newRow.id = "rotor-" + i;
+        newRow.appendChild(headCell);
+        newRow.appendChild(sequenceCell);
+        $("#rotorsValues").append(newRow);
+    }
+}
+
+function updateRotorsSequence() {
+    for (let i = 0; i < rotors.length; i++) {
+        const cellId = "#rotor-sequence-cell-" + i;
+        $(cellId).text(generateRotorSequence(i));
+    }
+}
+
+function printRotorsFromArray(rotorId) {
+    for (let i = 0; i < 26; i++) {
+        var tmp = '{"precodedLetter" : "' + keyCodes[i]["letter"] + '", "encodedLetter" : "' + rotors[rotorId][i] + '"}, ';
+        console.log(tmp);
+    }
+}
+
+function printRotors(rotorId) {
+    for (let i = 0; i < 26; i++) {
+        var tmp = '{"precodedLetter" : "' + keyCodes[i]["letter"] +
+            '", "encodedLetter" : "' + rotors[rotorId][i]["encodedLetter"] +
+            '", "currentIndex" : ' + i + '}, ';
+        console.log(tmp);
     }
 }

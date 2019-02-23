@@ -1,5 +1,6 @@
 $(document).ready(function (){
     resetRotorsCounter();
+    generateRotorsTableRows();
     const inputIdPrefix = "#cross-";
     for (let i = 0; i < keyCodes.length; i++) {
         let inputId = inputIdPrefix + keyCodes[i]["letter"];
@@ -87,4 +88,5 @@ function encodeLetter(keyLetter) {
     }
     rotateRotors();
     addEncryptedLetter(currentLetter);
+    updateRotorsSequence();
 }
