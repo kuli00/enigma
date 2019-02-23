@@ -198,6 +198,23 @@ function updateRotorsSequence() {
     }
 }
 
+function translatePatternToRotorsShift(rotorsValues) {
+    let newValues = [];
+    for (let i = 0; i < rotorsValues.length; i++) {
+        newValues.push(parseInt(rotorsValues[i]));
+    }
+    return newValues;
+}
+
+function adjustRotors(rotorsValues) {
+    for (let i = 0; i < rotorsValues.length; i++) {
+        for (let j = 0; j < rotorsValues[i]; j++) {
+            changeRotorsAssignment(i, "back");
+        }
+    }
+    updateRotorsSequence();
+}
+
 function printRotorsFromArray() {
     console.log(rotors);
 }

@@ -138,6 +138,9 @@ function decodingMethodChange(method) {
 function startDecoding() {
     if(checkPatternCode()) {
         $(".decoding-methods").toggleClass("disabled-element");
+        $("#startDecodingButton").toggleClass("hidden-method");
+        $("#stopDecodingButton").toggleClass("hidden-method");
+        fillInputsFromPattern();
         captureKeys = true;
     } else {
         alert("Your pattern is invalid");
@@ -148,6 +151,9 @@ function startDecoding() {
 
 function stopDecoding() {
     $(".decoding-methods").toggleClass("disabled-element");
+    $("#startDecodingButton").toggleClass("hidden-method");
+    $("#stopDecodingButton").toggleClass("hidden-method");
+    resetRotors();
     captureKeys = false;
 }
 
@@ -165,9 +171,11 @@ function checkPatternCode() {
 function fillInputsFromPattern() {
     const patternString = $("#patternCode").val();
     const patternArray = patternString.split(";");
+
     let crossValues = patternArray[0];
     crossValues = crossValues.substring(1, crossValues.length - 1);
     crossValues = crossValues.split(",");
+
     let rotorsValues = patternArray[1];
     rotorsValues = rotorsValues.substring(1, rotorsValues.length - 1);
     rotorsValues = rotorsValues.split(",");
@@ -175,6 +183,13 @@ function fillInputsFromPattern() {
     crossValues = translatePatternToKeyCodes(crossValues)
     fillCrossFromPattern(crossValues);
 
-    console.log(crossValues);
-    console.log(rotorsValues);
+    rotorsValues = translatePatternToRotorsShift(rotorsValues);
+    adjustRotors(rotorsValues);
+}
+
+function openEncodePage() {
+    window.location.href = "encode.html";
+}
+function openDecodePage() {
+    window.location.href = "decode.html";
 }
