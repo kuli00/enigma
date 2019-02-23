@@ -109,3 +109,40 @@ function copyToClipboard(inputId) {
     document.execCommand("copy");
     alert("Copied to clipboard");
 }
+
+function decodingMethodChange(method) {
+    const currentClasses = $(".pattern-method")[0].classList;
+    if(method === "pattern") {
+        $(".manual-method").toggleClass("hidden-method");
+    }
+    if(method === "manual") {
+        $(".pattern-method").toggleClass("hidden-method");
+    }
+    $(".pattern-method").toggleClass("hidden-method");
+    $(".manual-method").toggleClass("hidden-method");
+}
+
+function startDecoding() {
+    if(checkPatternCode()) {
+        $(".decoding-methods").toggleClass("disabled-element");
+    } else {
+        alert("Your pattern is invalid");
+        $("#patternCode").val("");
+    }
+
+}
+
+function stopDecoding() {
+    $(".decoding-methods").toggleClass("disabled-element");
+}
+
+function checkPatternCode() {
+    if(!$("#patternCode").val().match(
+        /^\[(\{[A-Z]\ \=\>\ [A-Z]\}\,\ )+\{[A-Z]\ \=\>\ [A-Z]\}\]\,\ \[(\d{1,2}\,\ )+\d{1,2}\]$/)) {
+        return false;
+    }
+    else {
+        return true;
+    }
+
+}

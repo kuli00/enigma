@@ -1,5 +1,3 @@
-
-
 function generateCodePattern() {
     let codePattern = "";
     codePattern += generateCrossPattern();

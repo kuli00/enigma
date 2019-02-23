@@ -13,15 +13,14 @@
     <title>Enigma</title>
 </head>
 <body>
-    <div class="container">
+    <div class="container-fluid">
         <div class="row">
-            <div class="col-12">
-                <input type="text" id="message" placeholder="Here you will have encrypted message" onclick="copyToClipboard()" readonly/>
+            <div class="col-12 config-buttons">
+                <input type="text" id="message" placeholder="Here you will have encrypted message" onclick="copyToClipboard('#message')" readonly/>
                 <button class="btn btn-warning" id="resetCrossButton" onclick="resetCross()">Reset cross panel</button>
                 <button class="btn btn-warning" id="resetRotorsButton" onclick="resetRotors()">Reset rotors</button>
                 <button class="btn btn-success" id="startEncodingButton" onclick="startEncoding()">Start encoding</button>
                 <button class="btn btn-danger" id="stopEncodingButton" onclick="stopEncoding()">Stop encoding</button>
-
             </div>
         </div>
         <div class="keyboard">
@@ -215,7 +214,7 @@
                     <div class="row">
                         <div class="col-12 code-patterns">
                             <h4>Click on textarea to copy the coding pattern</h4>
-                            <textarea id="code-pattern" class="code-pattern" onclick="copyToClipboard()" readonly></textarea>
+                            <textarea id="code-pattern" class="code-pattern" onclick="copyToClipboard('#code-pattern')" readonly></textarea>
                         </div>
                     </div>
                 </div>
