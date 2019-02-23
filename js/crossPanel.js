@@ -9,6 +9,10 @@ function encodeLetterViaCross(letter) {
     return newLetter;
 }
 
+function decodeLetterViaCross(letter) {
+    const crossInputId = "#cross-" + letter;
+}
+
 function autoFillCross(inputId) {
     if (validateCross(inputId) && checkIsCrossExist($(inputId).val(), inputId)) {
         $(inputId).val("");
@@ -18,6 +22,24 @@ function autoFillCross(inputId) {
         const tmp = inputId.split("#");
         const choosenLetterId = "#pre" + tmp[1];
         $(crossLetterId).val($(choosenLetterId).val());
+    }
+}
+
+function translatePatternToKeyCodes(patternArray){
+    let crossKeyKodes = [];
+    for (let i = 0; i < patternArray.length; i++) {
+        const tmp = patternArray[i].split(" => ");
+        const precodedLetter = tmp[0].split("{")[1];
+        const encodedLetter = tmp[1].split("}")[0];
+        crossKeyKodes.push([precodedLetter, encodedLetter]);
+    }
+    return crossKeyKodes;
+}
+
+function fillCrossFromPattern(crossArray) {
+    for (let i = 0; i < crossArray.length; i++) {
+        const inputId = "#cross-" + crossArray[i][0];
+        $(inputId).val(crossArray[i][1]);
     }
 }
 

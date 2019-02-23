@@ -1,4 +1,7 @@
+let captureKeys = false;
+let codingWay;
 $(document).ready(function (){
+    codingWay =  $("#codingWay").val();
     resetRotorsCounter();
     generateRotorsTableRows();
     generateCodePattern();
@@ -12,30 +15,40 @@ $(document).ready(function (){
                 autoFillCross(inputId);
             }
         });
+
         $(inputId).on("keydown", function(event) {
             if (event.keyCode === 8 || event.keyCode === 46) {
                 removePair(inputId);
             }
         });
-
     }
+
 });
 
-let captureKeys = false;
 $(document).keydown(function (e) {
     if (captureKeys && getKeyLetter(e) !== false) {
-        const newLetter = encodeLetter(getKeyLetter(e));
-        changeKeyboardButtonHighlight(getButtonId(newLetter), true);
+        if(codingWay === "encode") {
+            const newLetter = encodeLetter(getKeyLetter(e));
+            changeKeyboardButtonHighlight(getButtonId(newLetter), true);
+        }
+        if(codingWay === "decode") {
+            changeKeyboardButtonHighlight(getButtonId(getKeyLetter(e)), true);
+        }
     }
 });
 
 $(document).keyup(function (e) {
     if (captureKeys && getKeyLetter(e) !== false) {
-        const newLetter = encodeLetter(getKeyLetter(e));
-        changeKeyboardButtonHighlight(getButtonId(newLetter), false);
-        rotateRotors();
-        addEncryptedLetter(newLetter);
-        updateRotorsSequence();
+        if(codingWay === "encode") {
+            const newLetter = encodeLetter(getKeyLetter(e));
+            changeKeyboardButtonHighlight(getButtonId(newLetter), false);
+            rotateRotors();
+            addEncryptedLetter(newLetter);
+            updateRotorsSequence();
+        }
+        if(codingWay === "decode") {
+            changeKeyboardButtonHighlight(getButtonId(getKeyLetter(e)), false);
+        }
     }
 });
 
@@ -125,6 +138,7 @@ function decodingMethodChange(method) {
 function startDecoding() {
     if(checkPatternCode()) {
         $(".decoding-methods").toggleClass("disabled-element");
+        captureKeys = true;
     } else {
         alert("Your pattern is invalid");
         $("#patternCode").val("");
@@ -134,15 +148,33 @@ function startDecoding() {
 
 function stopDecoding() {
     $(".decoding-methods").toggleClass("disabled-element");
+    captureKeys = false;
 }
 
 function checkPatternCode() {
     if(!$("#patternCode").val().match(
-        /^\[(\{[A-Z]\ \=\>\ [A-Z]\}\,\ )+\{[A-Z]\ \=\>\ [A-Z]\}\]\,\ \[(\d{1,2}\,\ )+\d{1,2}\]$/)) {
+        /^\[((\{[A-Z]\ \=\>\ [A-Z]\}\,\ )+\{[A-Z]\ \=\>\ [A-Z]\}){0,26}\]\;\[(\d{1,2}\,\ )+\d{1,2}\]$/)) {
         return false;
     }
     else {
         return true;
     }
 
+}
+
+function fillInputsFromPattern() {
+    const patternString = $("#patternCode").val();
+    const patternArray = patternString.split(";");
+    let crossValues = patternArray[0];
+    crossValues = crossValues.substring(1, crossValues.length - 1);
+    crossValues = crossValues.split(",");
+    let rotorsValues = patternArray[1];
+    rotorsValues = rotorsValues.substring(1, rotorsValues.length - 1);
+    rotorsValues = rotorsValues.split(",");
+
+    crossValues = translatePatternToKeyCodes(crossValues)
+    fillCrossFromPattern(crossValues);
+
+    console.log(crossValues);
+    console.log(rotorsValues);
 }

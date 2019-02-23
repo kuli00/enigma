@@ -22,7 +22,7 @@ function generateCrossPattern() {
             crossPatternString += ", ";
         }
     }
-    crossPatternString += "], ";
+    crossPatternString += "];";
     return crossPatternString;
 }
 
