@@ -123,7 +123,6 @@ function changeRotorsAssignment(rotorId, direction) {
         newRotor[newRotor.length - 1]["currentIndex"] = tmpLetterIndex;
     }
     rotors[rotorId] = newRotor;
-    generateCodePattern();
 }
 
 function resetRotors() {

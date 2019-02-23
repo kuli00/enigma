@@ -10,13 +10,11 @@ $(document).ready(function (){
                 (event.keyCode >= 96 && event.keyCode <= 111) ||
                 (event.keyCode >= 186)) {
                 autoFillCross(inputId);
-                generateCodePattern();
             }
         });
         $(inputId).on("keydown", function(event) {
             if (event.keyCode === 8 || event.keyCode === 46) {
                 removePair(inputId);
-                generateCodePattern();
             }
         });
 
@@ -26,26 +24,34 @@ $(document).ready(function (){
 let captureKeys = false;
 $(document).keydown(function (e) {
     if (captureKeys && getKeyLetter(e) !== false) {
-        changeKeyboardButtonHighlight(getButtonId(getKeyLetter(e)), true);
+        const newLetter = encodeLetter(getKeyLetter(e));
+        changeKeyboardButtonHighlight(getButtonId(newLetter), true);
     }
 });
 
 $(document).keyup(function (e) {
     if (captureKeys && getKeyLetter(e) !== false) {
-        changeKeyboardButtonHighlight(getButtonId(getKeyLetter(e)), false);
-        encodeLetter(getKeyLetter(e));
+        const newLetter = encodeLetter(getKeyLetter(e));
+        changeKeyboardButtonHighlight(getButtonId(newLetter), false);
+        rotateRotors();
+        addEncryptedLetter(newLetter);
+        updateRotorsSequence();
     }
 });
 
 function startEncoding() {
     $("#startEncodingButton").css("display", "none");
     $("#stopEncodingButton").css("display", "inline");
+    updateAllInputsStatus();
+    generateCodePattern();
+    resetMessage();
     captureKeys = true;
 }
 
 function stopEncoding() {
     $("#stopEncodingButton").css("display", "none");
     $("#startEncodingButton").css("display", "inline");
+    updateAllInputsStatus();
     captureKeys = false;
 }
 
@@ -89,7 +95,17 @@ function encodeLetter(keyLetter) {
     for (let i = 0; i < rotors.length; i++) {
         currentLetter = encodeViaRotor(i, currentLetter);
     }
-    rotateRotors();
-    addEncryptedLetter(currentLetter);
-    updateRotorsSequence();
+    return currentLetter;
+}
+
+function updateAllInputsStatus() {
+    $("thead").toggleClass("disabled-element");
+    $("tbody").toggleClass("disabled-element");
+}
+
+function copyToClipboard(inputId) {
+    const copyValue = $(inputId);
+    copyValue.select();
+    document.execCommand("copy");
+    alert("Copied to clipboard");
 }

@@ -32,7 +32,24 @@ body {
 
 table {
     background-color: #f7f7f7;
+    position: relative;
 }
+
+.disabled-element::before {
+    background-color: #4e555b;
+    opacity: 0.5;
+    z-index: 10;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    content: "";
+}
+
+thead, tbody {
+    position: relative;
+}
+
+
 
 table tr {
     padding: 0;

@@ -1,9 +1,4 @@
-function copyCodePattern() {
-    var codePattern = $("#code-pattern");
-    codePattern.select();
-    document.execCommand("copy");
-    alert("Pattern copied to clipboard");
-}
+
 
 function generateCodePattern() {
     let codePattern = "";
