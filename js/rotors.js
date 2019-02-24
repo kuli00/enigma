@@ -92,12 +92,16 @@ function encodeViaRotor(rotorId, letter) {
     const encodedLetter = currentRotor.filter(l => l.precodedLetter === letter);
     return encodedLetter[0]["encodedLetter"];
 }
+function decodeViaRotor(rotorId, letter) {
+    const currentRotor = rotors[rotorId];
+    const decodedLetter = currentRotor.filter(l => l.encodedLetter === letter);
+    return decodedLetter[0]["precodedLetter"];
+}
 
 function resetRotorsCounter() {
     for (let i = 0; i < rotorsCounter.length; i++) {
         rotorsCounter[i] = 0;
     }
-
 }
 
 function changeRotorsAssignment(rotorId, direction) {
@@ -129,15 +133,15 @@ function resetRotors() {
     location.reload();
 }
 
-function rotateRotors() {
-    changeRotorsAssignment(0, "forward");
+function rotateRotors(direction) {
+    changeRotorsAssignment(0, direction);
     rotorsCounter[0]++;
     for (let i = 0; i < rotors.length; i++){
         if (rotorsCounter[i] >= keyCodes.length) {
             rotorsCounter[i+1]++;
             rotorsCounter[i] = 0;
             if (i+1 < rotors.length) {
-                changeRotorsAssignment(i+1, "forward");
+                changeRotorsAssignment(i+1, direction);
             }
         }
     }
@@ -158,14 +162,16 @@ function generateRotorsTableRows() {
         rotorChangeButtonFront.innerHTML = "&#8656;";
         rotorChangeButtonFront.onclick = function() {
             changeRotorsAssignment(i, "back");
+            updateRotorCounter(i, 1);
             updateRotorsSequence();
         };
-
         var rotorChangeButtonEnd = document.createElement("BUTTON");
+
         rotorChangeButtonEnd.classList.add("rotor-button");
         rotorChangeButtonEnd.innerHTML = "&#8658;";
         rotorChangeButtonEnd.onclick = function () {
             changeRotorsAssignment(i, "forward");
+            updateRotorCounter(i, -1);
             updateRotorsSequence();
         };
 
@@ -208,6 +214,7 @@ function translatePatternToRotorsShift(rotorsValues) {
 
 function adjustRotors(rotorsValues) {
     for (let i = 0; i < rotorsValues.length; i++) {
+        rotorsCounter[i] = rotorsValues[i];
         for (let j = 0; j < rotorsValues[i]; j++) {
             changeRotorsAssignment(i, "back");
         }
@@ -225,5 +232,15 @@ function printRotors(rotorId) {
             '", "encodedLetter" : "' + rotors[rotorId][i]["encodedLetter"] +
             '", "currentIndex" : ' + i + '}, ';
         console.log(tmp);
+    }
+}
+
+function updateRotorCounter(rotorId, direction) {
+    rotorsCounter[rotorId] += direction;
+    if(rotorsCounter[rotorId] === -1) {
+        rotorsCounter[rotorId] = 25;
+    }
+    if(rotorsCounter[rotorId] === 26) {
+        rotorsCounter[rotorId] = 0;
     }
 }

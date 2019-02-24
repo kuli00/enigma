@@ -10,7 +10,13 @@ function encodeLetterViaCross(letter) {
 }
 
 function decodeLetterViaCross(letter) {
-    const crossInputId = "#cross-" + letter;
+    const allInputs = $(".cross-input");
+    for(let i=1; i<allInputs.length; i+=2) {
+        if (allInputs[i].value === letter) {
+            return allInputs[i-1].value;
+        }
+    }
+    return letter;
 }
 
 function autoFillCross(inputId) {

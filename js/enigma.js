@@ -4,7 +4,7 @@ $(document).ready(function (){
     codingWay =  $("#codingWay").val();
     resetRotorsCounter();
     generateRotorsTableRows();
-    generateCodePattern();
+    //generateCodePattern();
     const inputIdPrefix = "#cross-";
     for (let i = 0; i < keyCodes.length; i++) {
         let inputId = inputIdPrefix + keyCodes[i]["letter"];
@@ -32,7 +32,8 @@ $(document).keydown(function (e) {
             changeKeyboardButtonHighlight(getButtonId(newLetter), true);
         }
         if(codingWay === "decode") {
-            changeKeyboardButtonHighlight(getButtonId(getKeyLetter(e)), true);
+            const newLetter = decodeLetter(getKeyLetter(e));
+            changeKeyboardButtonHighlight(getButtonId(newLetter), true);
         }
     }
 });
@@ -42,12 +43,16 @@ $(document).keyup(function (e) {
         if(codingWay === "encode") {
             const newLetter = encodeLetter(getKeyLetter(e));
             changeKeyboardButtonHighlight(getButtonId(newLetter), false);
-            rotateRotors();
+            rotateRotors("forward");
             addEncryptedLetter(newLetter);
             updateRotorsSequence();
         }
         if(codingWay === "decode") {
-            changeKeyboardButtonHighlight(getButtonId(getKeyLetter(e)), false);
+            const newLetter = decodeLetter(getKeyLetter(e));
+            changeKeyboardButtonHighlight(getButtonId(newLetter), false);
+            rotateRotors("forward");
+            addEncryptedLetter(newLetter);
+            updateRotorsSequence();
         }
     }
 });
@@ -70,7 +75,6 @@ function stopEncoding() {
 
 function resetMessage() {
     $("#message").val("");
-    resetRotorsCounter();
 }
 
 function addEncryptedLetter(letter) {
@@ -103,11 +107,19 @@ function getButtonId(keyLetter) {
 }
 
 function encodeLetter(keyLetter) {
-    let currentLetter;
-    currentLetter = encodeLetterViaCross(keyLetter);
+    let currentLetter = encodeLetterViaCross(keyLetter);
     for (let i = 0; i < rotors.length; i++) {
         currentLetter = encodeViaRotor(i, currentLetter);
     }
+    return currentLetter;
+}
+
+function decodeLetter(keyLetter) {
+    let currentLetter = keyLetter;
+    for (let i = rotors.length; i > 0; i--) {
+        currentLetter = decodeViaRotor(i - 1, currentLetter);
+    }
+    currentLetter = decodeLetterViaCross(currentLetter);
     return currentLetter;
 }
 
@@ -124,20 +136,21 @@ function copyToClipboard(inputId) {
 }
 
 function decodingMethodChange(method) {
-    const currentClasses = $(".pattern-method")[0].classList;
+    $(".pattern-method").toggleClass("hidden-method");
+    $(".manual-method").toggleClass("hidden-method");
     if(method === "pattern") {
         $(".manual-method").toggleClass("hidden-method");
     }
     if(method === "manual") {
         $(".pattern-method").toggleClass("hidden-method");
     }
-    $(".pattern-method").toggleClass("hidden-method");
-    $(".manual-method").toggleClass("hidden-method");
 }
 
 function startDecoding() {
     if(checkPatternCode()) {
-        $(".decoding-methods").toggleClass("disabled-element");
+        $("textarea").css("readonly", "true");
+        $("thead").toggleClass("disabled-element");
+        $("tbody").toggleClass("disabled-element");
         $("#startDecodingButton").toggleClass("hidden-method");
         $("#stopDecodingButton").toggleClass("hidden-method");
         fillInputsFromPattern();
@@ -150,10 +163,11 @@ function startDecoding() {
 }
 
 function stopDecoding() {
-    $(".decoding-methods").toggleClass("disabled-element");
+    $("thead").toggleClass("disabled-element");
+    $("tbody").toggleClass("disabled-element");
     $("#startDecodingButton").toggleClass("hidden-method");
     $("#stopDecodingButton").toggleClass("hidden-method");
-    resetRotors();
+    $("textarea").css("readonly", "false");
     captureKeys = false;
 }
 
@@ -174,14 +188,15 @@ function fillInputsFromPattern() {
 
     let crossValues = patternArray[0];
     crossValues = crossValues.substring(1, crossValues.length - 1);
-    crossValues = crossValues.split(",");
+    if(crossValues !== "") {
+        crossValues = crossValues.split(",");
+        crossValues = translatePatternToKeyCodes(crossValues)
+        fillCrossFromPattern(crossValues);
+    }
 
     let rotorsValues = patternArray[1];
     rotorsValues = rotorsValues.substring(1, rotorsValues.length - 1);
     rotorsValues = rotorsValues.split(",");
-
-    crossValues = translatePatternToKeyCodes(crossValues)
-    fillCrossFromPattern(crossValues);
 
     rotorsValues = translatePatternToRotorsShift(rotorsValues);
     adjustRotors(rotorsValues);

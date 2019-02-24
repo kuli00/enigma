@@ -2,7 +2,8 @@ function generateCodePattern() {
     let codePattern = "";
     codePattern += generateCrossPattern();
     codePattern += generateRotorsPattern();
-    $("#code-pattern").val(codePattern);
+    $("#patternCode").val(codePattern);
+    //fillInputsFromPattern();
 }
 function generateCrossPattern() {
     let crossPattern = [];
