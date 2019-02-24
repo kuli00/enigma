@@ -42,3 +42,23 @@ function generateRotorsPattern() {
     rotorsPatternString += "]";
     return rotorsPatternString;
 }
+
+function fillInputsFromPattern() {
+    const patternString = $("#patternCode").val();
+    const patternArray = patternString.split(";");
+
+    let crossValues = patternArray[0];
+    crossValues = crossValues.substring(1, crossValues.length - 1);
+    if(crossValues !== "") {
+        crossValues = crossValues.split(",");
+        crossValues = translatePatternToKeyCodes(crossValues)
+        fillCrossFromPattern(crossValues);
+    }
+
+    let rotorsValues = patternArray[1];
+    rotorsValues = rotorsValues.substring(1, rotorsValues.length - 1);
+    rotorsValues = rotorsValues.split(",");
+
+    rotorsValues = translatePatternToRotorsShift(rotorsValues);
+    adjustRotors(rotorsValues);
+}

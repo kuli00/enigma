@@ -4,8 +4,9 @@ $(document).ready(function (){
     codingWay =  $("#codingWay").val();
     resetRotorsCounter();
     generateRotorsTableRows();
-    //generateCodePattern();
     const inputIdPrefix = "#cross-";
+
+    //filtering non-letter & backspace & delete keycodes
     for (let i = 0; i < keyCodes.length; i++) {
         let inputId = inputIdPrefix + keyCodes[i]["letter"];
         $(inputId).on("keyup", function(event) {
@@ -15,61 +16,86 @@ $(document).ready(function (){
                 autoFillCross(inputId);
             }
         });
-
         $(inputId).on("keydown", function(event) {
             if (event.keyCode === 8 || event.keyCode === 46) {
                 removePair(inputId);
             }
         });
     }
-
 });
 
 $(document).keydown(function (e) {
     if (captureKeys && getKeyLetter(e) !== false) {
+        let newLetter;
         if(codingWay === "encode") {
-            const newLetter = encodeLetter(getKeyLetter(e));
-            changeKeyboardButtonHighlight(getButtonId(newLetter), true);
+            newLetter = encodeLetter(getKeyLetter(e));
         }
         if(codingWay === "decode") {
-            const newLetter = decodeLetter(getKeyLetter(e));
-            changeKeyboardButtonHighlight(getButtonId(newLetter), true);
+            newLetter = decodeLetter(getKeyLetter(e));
         }
+        changeKeyboardButtonHighlight(getButtonId(newLetter), true);
     }
 });
 
 $(document).keyup(function (e) {
     if (captureKeys && getKeyLetter(e) !== false) {
+        let newLetter;
         if(codingWay === "encode") {
-            const newLetter = encodeLetter(getKeyLetter(e));
-            changeKeyboardButtonHighlight(getButtonId(newLetter), false);
-            rotateRotors("forward");
-            addEncryptedLetter(newLetter);
-            updateRotorsSequence();
+            newLetter = encodeLetter(getKeyLetter(e));
         }
         if(codingWay === "decode") {
-            const newLetter = decodeLetter(getKeyLetter(e));
-            changeKeyboardButtonHighlight(getButtonId(newLetter), false);
-            rotateRotors("forward");
-            addEncryptedLetter(newLetter);
-            updateRotorsSequence();
+            newLetter = decodeLetter(getKeyLetter(e));
         }
+        changeKeyboardButtonHighlight(getButtonId(newLetter), false);
+        rotateRotors("forward");
+        addLetterToMessage(newLetter);
+        updateRotorsSequence();
     }
 });
 
 function startEncoding() {
-    $("#startEncodingButton").css("display", "none");
-    $("#stopEncodingButton").css("display", "inline");
-    updateAllInputsStatus();
-    generateCodePattern();
     resetMessage();
+    $("#startEncodingButton").css("display", "none");
+    $("#startDecodingButton").css("display", "none");
+    $("#stopEncodingButton").css("display", "inline");
+    changeConfigurationFieldsStatus();
+    generateCodePattern();
     captureKeys = true;
 }
 
 function stopEncoding() {
+    resetRotors();
     $("#stopEncodingButton").css("display", "none");
     $("#startEncodingButton").css("display", "inline");
-    updateAllInputsStatus();
+    $("#startDecodingButton").css("display", "inline");
+    changeConfigurationFieldsStatus();
+    captureKeys = false;
+}
+
+function startDecoding() {
+    if(checkPatternCode()) {
+        resetMessage();
+        $("textarea").attr("readonly", true);
+        changeConfigurationFieldsStatus();
+        $("#startDecodingButton").css("display", "none");
+        $("#startEncodingButton").css("display", "none");
+        $("#stopDecodingButton").css("display", "inline");
+        fillInputsFromPattern();
+        captureKeys = true;
+    } else {
+        alert("Your pattern is invalid");
+        $("#patternCode").val("");
+    }
+
+}
+
+function stopDecoding() {
+    resetRotors();
+    changeConfigurationFieldsStatus();
+    $("#startDecodingButton").css("display", "inline");
+    $("#startEncodingButton").css("display", "inline");
+    $("#stopDecodingButton").css("display", "none");
+    $("textarea").attr("readonly", false);
     captureKeys = false;
 }
 
@@ -77,9 +103,8 @@ function resetMessage() {
     $("#message").val("");
 }
 
-function addEncryptedLetter(letter) {
-    const currentMessage = $("#message").val();
-    $("#message").val(currentMessage + letter);
+function addLetterToMessage(letter) {
+    $("#message").val($("#message").val() + letter);
 }
 
 function changeKeyboardButtonHighlight(buttonId, highlighted) {
@@ -109,7 +134,7 @@ function getButtonId(keyLetter) {
 function encodeLetter(keyLetter) {
     let currentLetter = encodeLetterViaCross(keyLetter);
     for (let i = 0; i < rotors.length; i++) {
-        currentLetter = encodeViaRotor(i, currentLetter);
+        currentLetter = encodeLetterViaRotor(i, currentLetter);
     }
     return currentLetter;
 }
@@ -117,13 +142,13 @@ function encodeLetter(keyLetter) {
 function decodeLetter(keyLetter) {
     let currentLetter = keyLetter;
     for (let i = rotors.length; i > 0; i--) {
-        currentLetter = decodeViaRotor(i - 1, currentLetter);
+        currentLetter = decodeLetterViaRotor(i - 1, currentLetter);
     }
     currentLetter = decodeLetterViaCross(currentLetter);
     return currentLetter;
 }
 
-function updateAllInputsStatus() {
+function changeConfigurationFieldsStatus() {
     $("thead").toggleClass("disabled-element");
     $("tbody").toggleClass("disabled-element");
 }
@@ -146,60 +171,15 @@ function decodingMethodChange(method) {
     }
 }
 
-function startDecoding() {
-    if(checkPatternCode()) {
-        $("textarea").css("readonly", "true");
-        $("thead").toggleClass("disabled-element");
-        $("tbody").toggleClass("disabled-element");
-        $("#startDecodingButton").toggleClass("hidden-method");
-        $("#stopDecodingButton").toggleClass("hidden-method");
-        fillInputsFromPattern();
-        captureKeys = true;
-    } else {
-        alert("Your pattern is invalid");
-        $("#patternCode").val("");
-    }
-
-}
-
-function stopDecoding() {
-    $("thead").toggleClass("disabled-element");
-    $("tbody").toggleClass("disabled-element");
-    $("#startDecodingButton").toggleClass("hidden-method");
-    $("#stopDecodingButton").toggleClass("hidden-method");
-    $("textarea").css("readonly", "false");
-    captureKeys = false;
-}
-
 function checkPatternCode() {
     if(!$("#patternCode").val().match(
-        /^\[((\{[A-Z]\ \=\>\ [A-Z]\}\,\ )+\{[A-Z]\ \=\>\ [A-Z]\}){0,26}\]\;\[(\d{1,2}\,\ )+\d{1,2}\]$/)) {
+        /^\[((\{[A-Z]\ \=\>\ [A-Z]\}\,\ )+\{[A-Z]\ \=\>\ [A-Z]\}){0,26}\]\;\[(\d{1,2}\,\ )+\d{1,2}\]$/)
+        && $("#patternCode").val() !== "") {
         return false;
     }
     else {
         return true;
     }
-
-}
-
-function fillInputsFromPattern() {
-    const patternString = $("#patternCode").val();
-    const patternArray = patternString.split(";");
-
-    let crossValues = patternArray[0];
-    crossValues = crossValues.substring(1, crossValues.length - 1);
-    if(crossValues !== "") {
-        crossValues = crossValues.split(",");
-        crossValues = translatePatternToKeyCodes(crossValues)
-        fillCrossFromPattern(crossValues);
-    }
-
-    let rotorsValues = patternArray[1];
-    rotorsValues = rotorsValues.substring(1, rotorsValues.length - 1);
-    rotorsValues = rotorsValues.split(",");
-
-    rotorsValues = translatePatternToRotorsShift(rotorsValues);
-    adjustRotors(rotorsValues);
 }
 
 function openEncodePage() {

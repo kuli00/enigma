@@ -22,6 +22,8 @@
                 <button class="btn btn-warning" id="resetRotorsButton" onclick="resetRotors()">Reset rotors</button>
                 <button class="btn btn-success" id="startEncodingButton" onclick="startEncoding()">Start encoding</button>
                 <button class="btn btn-danger" id="stopEncodingButton" onclick="stopEncoding()">Stop encoding</button>
+                <button class="btn btn-success" id="startDecodingButton" onclick="startDecoding()">Start decoding</button>
+                <button class="btn btn-danger" id="stopDecodingButton" onclick="stopDecoding()">Stop decoding</button>
             </div>
         </div>
         <div class="keyboard">
@@ -215,7 +217,7 @@
                     <div class="row">
                         <div class="col-12 code-patterns">
                             <h4>Click on textarea to copy the coding pattern</h4>
-                            <textarea id="patternCode" class="code-pattern" onclick="copyToClipboard('#code-pattern')" readonly></textarea>
+                            <textarea id="patternCode" class="pattern" onclick="copyToClipboard('#patternCode')">[];[0, 0, 0]</textarea>
                         </div>
                     </div>
                 </div>

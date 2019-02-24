@@ -91,7 +91,7 @@ tr input {
     text-align: center;
 }
 
-#stopEncodingButton {
+#stopEncodingButton, #stopDecodingButton {
     display: none;
 }
 
