@@ -216,8 +216,7 @@ function changeRotorsAssignment(rotorId, direction) {
 }
 
 function resetRotors() {
-    rotors = null;
-    rotors = rotorsTemplate;
+    rotors = JSON.parse(JSON.stringify( rotorsTemplate ));
     resetRotorsCounter();
     updateRotorsSequence();
 }

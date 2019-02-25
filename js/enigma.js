@@ -1,7 +1,6 @@
 let captureKeys = false;
 let codingWay;
 $(document).ready(function (){
-    codingWay =  $("#codingWay").val();
     resetRotorsCounter();
     generateRotorsTableRows();
     const inputIdPrefix = "#cross-";
@@ -53,6 +52,10 @@ $(document).keyup(function (e) {
     }
 });
 
+function updateCodingWay(direction) {
+    codingWay = direction;
+}
+
 function startEncoding() {
     resetMessage();
     $("#startEncodingButton").css("display", "none");
@@ -61,6 +64,7 @@ function startEncoding() {
     changeConfigurationFieldsStatus();
     generateCodePattern();
     captureKeys = true;
+    updateCodingWay("encode");
 }
 
 function stopEncoding() {
@@ -82,6 +86,7 @@ function startDecoding() {
         $("#stopDecodingButton").css("display", "inline");
         fillInputsFromPattern();
         captureKeys = true;
+        updateCodingWay("decode");
     } else {
         alert("Your pattern is invalid");
         $("#patternCode").val("");
