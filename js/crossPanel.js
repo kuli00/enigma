@@ -93,3 +93,50 @@ function removePair(inputId) {
     $(removeInputId).val("");
     $(inputId).val("");
 }
+
+function generateLettersOnSVG() {
+    for (let i = 1; i <= keyboardLayout.length; i++) {
+        for (let j = 1; j <= keyboardLayout[i-1].length; j++) {
+            let newCircle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+            newCircle.id = "crossCircle-" + keyboardLayout[i-1][j-1];
+            $("#crossPanel").append(newCircle);
+            /*
+            newElement.setAttribute("cx", j*25);
+            newElement.setAttribute("cy", i*25);
+            newElement.setAttribute("r", 10);
+            newElement.setAttribute("stroke", "white");
+            newElement.setAttribute("stroke-width", 3);
+            newElement.setAttribute("fill", "black"); */
+            $("#crossCircle-" + keyboardLayout[i-1][j-1]).attr({
+                "cx": j * 75,
+                "cy": i * 75,
+                "r": 21,
+                "stroke": "white",
+                "stroke-width": 3,
+                "fill": "black",
+                "onMo"
+            });
+            let newLetter = document.createElementNS("http://www.w3.org/2000/svg", "text");
+            newLetter.id = "crossLetter-" + keyboardLayout[i-1][j-1];
+            $("#crossPanel").append(newLetter);
+            $("#crossLetter-" + keyboardLayout[i-1][j-1]).attr({
+                "x": j * 75 - 6,
+                "y": i * 75 + 6,
+                "font-family": "Verdana",
+                "font-size": 20,
+                "fill": "white"
+            });
+            $("#crossLetter-" + keyboardLayout[i-1][j-1])[0].innerHTML = keyboardLayout[i-1][j-1];
+        }
+    }
+}
+
+function changePosition(inputId) {
+    let x = 0;
+    let y = 0;
+    $(inputId).onmousemove(function () {
+        $(inputId).attr({
+            "cx":
+        });
+    });
+}
