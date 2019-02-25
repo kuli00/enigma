@@ -3,7 +3,7 @@ function generateCodePattern() {
     codePattern += generateCrossPattern();
     codePattern += generateRotorsPattern();
     $("#patternCode").val(codePattern);
-    //fillInputsFromPattern();
+    fillInputsFromPattern();
 }
 function generateCrossPattern() {
     let crossPattern = [];

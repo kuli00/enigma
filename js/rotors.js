@@ -245,7 +245,7 @@ function generateRotorSequence(rotorId) {
 
 function generateRotorsTableRows() {
     for (let i = 0; i < rotors.length; i++) {
-        var rotorChangeButtonFront = document.createElement("BUTTON");
+        let rotorChangeButtonFront = document.createElement("BUTTON");
         rotorChangeButtonFront.classList.add("rotor-button");
         rotorChangeButtonFront.innerHTML = "&#8656;";
         rotorChangeButtonFront.onclick = function() {
@@ -253,7 +253,7 @@ function generateRotorsTableRows() {
             updateRotorCounter(i, 1);
             updateRotorsSequence();
         };
-        var rotorChangeButtonEnd = document.createElement("BUTTON");
+        let rotorChangeButtonEnd = document.createElement("BUTTON");
 
         rotorChangeButtonEnd.classList.add("rotor-button");
         rotorChangeButtonEnd.innerHTML = "&#8658;";
@@ -263,21 +263,21 @@ function generateRotorsTableRows() {
             updateRotorsSequence();
         };
 
-        var headCell = document.createElement("TD");
+        let headCell = document.createElement("TD");
         headCell.id = "rotor-head-cell-" + i;
         headCell.innerText = "Rotor #" + i;
 
-        var sequenceSpan = document.createElement("SPAN");
+        let sequenceSpan = document.createElement("SPAN");
         sequenceSpan.id = "rotor-sequence-span-" + i;
         sequenceSpan.innerText = generateRotorSequence(i);
 
-        var sequenceCell = document.createElement("TD");
+        let sequenceCell = document.createElement("TD");
         sequenceCell.appendChild(rotorChangeButtonFront);
         sequenceCell.id = "rotor-sequence-cell-" + i;
         sequenceCell.appendChild(sequenceSpan);
         sequenceCell.appendChild(rotorChangeButtonEnd);
 
-        var newRow = document.createElement("TR");
+        let newRow = document.createElement("TR");
         newRow.id = "rotor-" + i;
         newRow.appendChild(headCell);
         newRow.appendChild(sequenceCell);
@@ -308,19 +308,6 @@ function adjustRotors(rotorsValues) {
         }
     }
     updateRotorsSequence();
-}
-
-function printRotorsFromArray() {
-    console.log(rotors);
-}
-
-function printRotors(rotorId) {
-    for (let i = 0; i < 26; i++) {
-        var tmp = '{"precodedLetter" : "' + keyCodes[i]["letter"] +
-            '", "encodedLetter" : "' + rotors[rotorId][i]["encodedLetter"] +
-            '", "currentIndex" : ' + i + '}, ';
-        console.log(tmp);
-    }
 }
 
 function updateRotorCounter(rotorId, direction) {

@@ -32,14 +32,14 @@ function autoFillCross(inputId) {
 }
 
 function translatePatternToKeyCodes(patternArray){
-    let crossKeyKodes = [];
+    let crossKeyCodes = [];
     for (let i = 0; i < patternArray.length; i++) {
         const tmp = patternArray[i].split(" => ");
         const precodedLetter = tmp[0].split("{")[1];
         const encodedLetter = tmp[1].split("}")[0];
-        crossKeyKodes.push([precodedLetter, encodedLetter]);
+        crossKeyCodes.push([precodedLetter, encodedLetter]);
     }
-    return crossKeyKodes;
+    return crossKeyCodes;
 }
 
 function fillCrossFromPattern(crossArray) {
@@ -53,10 +53,8 @@ function checkIsCrossExist(letter, currentInputId) {
     let tmp = false;
     for (let i = 0; i < keyCodes.length; i++) {
         const inputId = "#cross-" + keyCodes[i]["letter"];
-        if (inputId !== currentInputId) {
-            if ($(inputId).val() === letter) {
-                tmp = true;
-            }
+        if (inputId !== currentInputId && $(inputId).val() === letter) {
+            tmp = true;
         }
     }
     return tmp;

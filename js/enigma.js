@@ -186,10 +186,3 @@ function checkPatternCode() {
         return true;
     }
 }
-
-function openEncodePage() {
-    window.location.href = "encode.html";
-}
-function openDecodePage() {
-    window.location.href = "decode.html";
-}
