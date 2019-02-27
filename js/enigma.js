@@ -2,6 +2,8 @@ let captureKeys = false;
 let codingWay;
 $(document).ready(function (){
     resetRotorsCounter();
+    resetRotors();
+    generateKeyboard();
     generateRotorsTableRows();
     const inputIdPrefix = "#cross-";
 
@@ -58,9 +60,6 @@ function updateCodingWay(direction) {
 
 function startEncoding() {
     resetMessage();
-    $("#startEncodingButton").css("display", "none");
-    $("#startDecodingButton").css("display", "none");
-    $("#stopEncodingButton").css("display", "inline");
     changeConfigurationFieldsStatus();
     generateCodePattern();
     captureKeys = true;
@@ -69,9 +68,6 @@ function startEncoding() {
 
 function stopEncoding() {
     resetRotors();
-    $("#stopEncodingButton").css("display", "none");
-    $("#startEncodingButton").css("display", "inline");
-    $("#startDecodingButton").css("display", "inline");
     changeConfigurationFieldsStatus();
     captureKeys = false;
 }
@@ -141,13 +137,23 @@ function encodeLetter(keyLetter) {
     for (let i = 0; i < rotors.length; i++) {
         currentLetter = encodeLetterViaRotor(i, currentLetter);
     }
+    currentLetter = manipulateViaReverseCylinder(currentLetter);
+    for (let i = rotors.length -1; i >= 0; i--) {
+        currentLetter = decodeLetterViaRotor(i, currentLetter);
+    }
+    currentLetter = encodeLetterViaCross(currentLetter);
     return currentLetter;
 }
 
 function decodeLetter(keyLetter) {
     let currentLetter = keyLetter;
-    for (let i = rotors.length; i > 0; i--) {
-        currentLetter = decodeLetterViaRotor(i - 1, currentLetter);
+    currentLetter = decodeLetterViaCross(currentLetter);
+    for (let i = 0; i < rotors.length; i++) {
+        currentLetter = encodeLetterViaRotor(i, currentLetter);
+    }
+    currentLetter = manipulateViaReverseCylinder(currentLetter);
+    for (let i = rotors.length -1; i >= 0; i--) {
+        currentLetter = decodeLetterViaRotor(i, currentLetter);
     }
     currentLetter = decodeLetterViaCross(currentLetter);
     return currentLetter;
@@ -184,5 +190,27 @@ function checkPatternCode() {
     }
     else {
         return true;
+    }
+}
+
+function generateKeyboard() {
+    for (let i = 0; i < keyboardLayout.length; i++) {
+        for (let j = 0; j < keyboardLayout[i].length; j++) {
+            let newKeyboardKey = document.createElement("BUTTON");
+            newKeyboardKey.id = keyboardLayout[i][j];
+            newKeyboardKey.className = "keyboard-key";
+            newKeyboardKey.setAttribute("disabled", "true");
+            newKeyboardKey.innerHTML = keyboardLayout[i][j];
+            $("#keyboard-row-" + (i + 1)).append(newKeyboardKey);
+        }
+    }
+}
+
+function startStopEnigma() {
+    $("#onOffButton").toggleClass("red-button");
+    if (captureKeys) {
+        stopEncoding();
+    } else {
+        startEncoding();
     }
 }

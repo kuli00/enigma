@@ -1,187 +1,130 @@
 const rotorsTemplate = [
     [
-        {"precodedLetter" : "A", "encodedLetter" : "D", "currentIndex" : 0},
-        {"precodedLetter" : "B", "encodedLetter" : "M", "currentIndex" : 1},
-        {"precodedLetter" : "C", "encodedLetter" : "T", "currentIndex" : 2},
-        {"precodedLetter" : "D", "encodedLetter" : "W", "currentIndex" : 3},
-        {"precodedLetter" : "E", "encodedLetter" : "S", "currentIndex" : 4},
-        {"precodedLetter" : "F", "encodedLetter" : "I", "currentIndex" : 5},
-        {"precodedLetter" : "G", "encodedLetter" : "L", "currentIndex" : 6},
-        {"precodedLetter" : "H", "encodedLetter" : "R", "currentIndex" : 7},
-        {"precodedLetter" : "I", "encodedLetter" : "U", "currentIndex" : 8},
-        {"precodedLetter" : "J", "encodedLetter" : "Y", "currentIndex" : 9},
-        {"precodedLetter" : "K", "encodedLetter" : "Q", "currentIndex" : 10},
-        {"precodedLetter" : "L", "encodedLetter" : "N", "currentIndex" : 11},
-        {"precodedLetter" : "M", "encodedLetter" : "K", "currentIndex" : 12},
-        {"precodedLetter" : "N", "encodedLetter" : "F", "currentIndex" : 13},
-        {"precodedLetter" : "O", "encodedLetter" : "E", "currentIndex" : 14},
-        {"precodedLetter" : "P", "encodedLetter" : "J", "currentIndex" : 15},
-        {"precodedLetter" : "Q", "encodedLetter" : "C", "currentIndex" : 16},
-        {"precodedLetter" : "R", "encodedLetter" : "A", "currentIndex" : 17},
-        {"precodedLetter" : "S", "encodedLetter" : "Z", "currentIndex" : 18},
-        {"precodedLetter" : "T", "encodedLetter" : "B", "currentIndex" : 19},
-        {"precodedLetter" : "U", "encodedLetter" : "P", "currentIndex" : 20},
-        {"precodedLetter" : "V", "encodedLetter" : "G", "currentIndex" : 21},
-        {"precodedLetter" : "W", "encodedLetter" : "X", "currentIndex" : 22},
-        {"precodedLetter" : "X", "encodedLetter" : "O", "currentIndex" : 23},
-        {"precodedLetter" : "Y", "encodedLetter" : "H", "currentIndex" : 24},
-        {"precodedLetter" : "Z", "encodedLetter" : "V", "currentIndex" : 25},
+        {"in" : "A", "out" : "D", "currentIndex" : 0},
+        {"in" : "B", "out" : "M", "currentIndex" : 1},
+        {"in" : "C", "out" : "T", "currentIndex" : 2},
+        {"in" : "D", "out" : "W", "currentIndex" : 3},
+        {"in" : "E", "out" : "S", "currentIndex" : 4},
+        {"in" : "F", "out" : "I", "currentIndex" : 5},
+        {"in" : "G", "out" : "L", "currentIndex" : 6},
+        {"in" : "H", "out" : "R", "currentIndex" : 7},
+        {"in" : "I", "out" : "U", "currentIndex" : 8},
+        {"in" : "J", "out" : "Y", "currentIndex" : 9},
+        {"in" : "K", "out" : "Q", "currentIndex" : 10},
+        {"in" : "L", "out" : "N", "currentIndex" : 11},
+        {"in" : "M", "out" : "K", "currentIndex" : 12},
+        {"in" : "N", "out" : "F", "currentIndex" : 13},
+        {"in" : "O", "out" : "E", "currentIndex" : 14},
+        {"in" : "P", "out" : "J", "currentIndex" : 15},
+        {"in" : "Q", "out" : "C", "currentIndex" : 16},
+        {"in" : "R", "out" : "A", "currentIndex" : 17},
+        {"in" : "S", "out" : "Z", "currentIndex" : 18},
+        {"in" : "T", "out" : "B", "currentIndex" : 19},
+        {"in" : "U", "out" : "P", "currentIndex" : 20},
+        {"in" : "V", "out" : "G", "currentIndex" : 21},
+        {"in" : "W", "out" : "X", "currentIndex" : 22},
+        {"in" : "X", "out" : "O", "currentIndex" : 23},
+        {"in" : "Y", "out" : "H", "currentIndex" : 24},
+        {"in" : "Z", "out" : "V", "currentIndex" : 25},
     ],
     [
-        {"precodedLetter" : "A", "encodedLetter" : "H", "currentIndex" : 0},
-        {"precodedLetter" : "B", "encodedLetter" : "Q", "currentIndex" : 1},
-        {"precodedLetter" : "C", "encodedLetter" : "Z", "currentIndex" : 2},
-        {"precodedLetter" : "D", "encodedLetter" : "G", "currentIndex" : 3},
-        {"precodedLetter" : "E", "encodedLetter" : "P", "currentIndex" : 4},
-        {"precodedLetter" : "F", "encodedLetter" : "J", "currentIndex" : 5},
-        {"precodedLetter" : "G", "encodedLetter" : "T", "currentIndex" : 6},
-        {"precodedLetter" : "H", "encodedLetter" : "M", "currentIndex" : 7},
-        {"precodedLetter" : "I", "encodedLetter" : "O", "currentIndex" : 8},
-        {"precodedLetter" : "J", "encodedLetter" : "B", "currentIndex" : 9},
-        {"precodedLetter" : "K", "encodedLetter" : "L", "currentIndex" : 10},
-        {"precodedLetter" : "L", "encodedLetter" : "N", "currentIndex" : 11},
-        {"precodedLetter" : "M", "encodedLetter" : "C", "currentIndex" : 12},
-        {"precodedLetter" : "N", "encodedLetter" : "I", "currentIndex" : 13},
-        {"precodedLetter" : "O", "encodedLetter" : "F", "currentIndex" : 14},
-        {"precodedLetter" : "P", "encodedLetter" : "D", "currentIndex" : 15},
-        {"precodedLetter" : "Q", "encodedLetter" : "Y", "currentIndex" : 16},
-        {"precodedLetter" : "R", "encodedLetter" : "A", "currentIndex" : 17},
-        {"precodedLetter" : "S", "encodedLetter" : "W", "currentIndex" : 18},
-        {"precodedLetter" : "T", "encodedLetter" : "V", "currentIndex" : 19},
-        {"precodedLetter" : "U", "encodedLetter" : "E", "currentIndex" : 20},
-        {"precodedLetter" : "V", "encodedLetter" : "U", "currentIndex" : 21},
-        {"precodedLetter" : "W", "encodedLetter" : "S", "currentIndex" : 22},
-        {"precodedLetter" : "X", "encodedLetter" : "R", "currentIndex" : 23},
-        {"precodedLetter" : "Y", "encodedLetter" : "K", "currentIndex" : 24},
-        {"precodedLetter" : "Z", "encodedLetter" : "X", "currentIndex" : 25},
+        {"in" : "A", "out" : "H", "currentIndex" : 0},
+        {"in" : "B", "out" : "Q", "currentIndex" : 1},
+        {"in" : "C", "out" : "Z", "currentIndex" : 2},
+        {"in" : "D", "out" : "G", "currentIndex" : 3},
+        {"in" : "E", "out" : "P", "currentIndex" : 4},
+        {"in" : "F", "out" : "J", "currentIndex" : 5},
+        {"in" : "G", "out" : "T", "currentIndex" : 6},
+        {"in" : "H", "out" : "M", "currentIndex" : 7},
+        {"in" : "I", "out" : "O", "currentIndex" : 8},
+        {"in" : "J", "out" : "B", "currentIndex" : 9},
+        {"in" : "K", "out" : "L", "currentIndex" : 10},
+        {"in" : "L", "out" : "N", "currentIndex" : 11},
+        {"in" : "M", "out" : "C", "currentIndex" : 12},
+        {"in" : "N", "out" : "I", "currentIndex" : 13},
+        {"in" : "O", "out" : "F", "currentIndex" : 14},
+        {"in" : "P", "out" : "D", "currentIndex" : 15},
+        {"in" : "Q", "out" : "Y", "currentIndex" : 16},
+        {"in" : "R", "out" : "A", "currentIndex" : 17},
+        {"in" : "S", "out" : "W", "currentIndex" : 18},
+        {"in" : "T", "out" : "V", "currentIndex" : 19},
+        {"in" : "U", "out" : "E", "currentIndex" : 20},
+        {"in" : "V", "out" : "U", "currentIndex" : 21},
+        {"in" : "W", "out" : "S", "currentIndex" : 22},
+        {"in" : "X", "out" : "R", "currentIndex" : 23},
+        {"in" : "Y", "out" : "K", "currentIndex" : 24},
+        {"in" : "Z", "out" : "X", "currentIndex" : 25},
     ],
     [
-        {"precodedLetter" : "A", "encodedLetter" : "U", "currentIndex" : 0},
-        {"precodedLetter" : "B", "encodedLetter" : "Q", "currentIndex" : 1},
-        {"precodedLetter" : "C", "encodedLetter" : "N", "currentIndex" : 2},
-        {"precodedLetter" : "D", "encodedLetter" : "T", "currentIndex" : 3},
-        {"precodedLetter" : "E", "encodedLetter" : "L", "currentIndex" : 4},
-        {"precodedLetter" : "F", "encodedLetter" : "S", "currentIndex" : 5},
-        {"precodedLetter" : "G", "encodedLetter" : "Z", "currentIndex" : 6},
-        {"precodedLetter" : "H", "encodedLetter" : "F", "currentIndex" : 7},
-        {"precodedLetter" : "I", "encodedLetter" : "M", "currentIndex" : 8},
-        {"precodedLetter" : "J", "encodedLetter" : "R", "currentIndex" : 9},
-        {"precodedLetter" : "K", "encodedLetter" : "E", "currentIndex" : 10},
-        {"precodedLetter" : "L", "encodedLetter" : "H", "currentIndex" : 11},
-        {"precodedLetter" : "M", "encodedLetter" : "D", "currentIndex" : 12},
-        {"precodedLetter" : "N", "encodedLetter" : "P", "currentIndex" : 13},
-        {"precodedLetter" : "O", "encodedLetter" : "X", "currentIndex" : 14},
-        {"precodedLetter" : "P", "encodedLetter" : "K", "currentIndex" : 15},
-        {"precodedLetter" : "Q", "encodedLetter" : "I", "currentIndex" : 16},
-        {"precodedLetter" : "R", "encodedLetter" : "B", "currentIndex" : 17},
-        {"precodedLetter" : "S", "encodedLetter" : "V", "currentIndex" : 18},
-        {"precodedLetter" : "T", "encodedLetter" : "Y", "currentIndex" : 19},
-        {"precodedLetter" : "U", "encodedLetter" : "G", "currentIndex" : 20},
-        {"precodedLetter" : "V", "encodedLetter" : "J", "currentIndex" : 21},
-        {"precodedLetter" : "W", "encodedLetter" : "C", "currentIndex" : 22},
-        {"precodedLetter" : "X", "encodedLetter" : "W", "currentIndex" : 23},
-        {"precodedLetter" : "Y", "encodedLetter" : "O", "currentIndex" : 24},
-        {"precodedLetter" : "Z", "encodedLetter" : "A", "currentIndex" : 25},
+        {"in" : "A", "out" : "U", "currentIndex" : 0},
+        {"in" : "B", "out" : "Q", "currentIndex" : 1},
+        {"in" : "C", "out" : "N", "currentIndex" : 2},
+        {"in" : "D", "out" : "T", "currentIndex" : 3},
+        {"in" : "E", "out" : "L", "currentIndex" : 4},
+        {"in" : "F", "out" : "S", "currentIndex" : 5},
+        {"in" : "G", "out" : "Z", "currentIndex" : 6},
+        {"in" : "H", "out" : "F", "currentIndex" : 7},
+        {"in" : "I", "out" : "M", "currentIndex" : 8},
+        {"in" : "J", "out" : "R", "currentIndex" : 9},
+        {"in" : "K", "out" : "E", "currentIndex" : 10},
+        {"in" : "L", "out" : "H", "currentIndex" : 11},
+        {"in" : "M", "out" : "D", "currentIndex" : 12},
+        {"in" : "N", "out" : "P", "currentIndex" : 13},
+        {"in" : "O", "out" : "X", "currentIndex" : 14},
+        {"in" : "P", "out" : "K", "currentIndex" : 15},
+        {"in" : "Q", "out" : "I", "currentIndex" : 16},
+        {"in" : "R", "out" : "B", "currentIndex" : 17},
+        {"in" : "S", "out" : "V", "currentIndex" : 18},
+        {"in" : "T", "out" : "Y", "currentIndex" : 19},
+        {"in" : "U", "out" : "G", "currentIndex" : 20},
+        {"in" : "V", "out" : "J", "currentIndex" : 21},
+        {"in" : "W", "out" : "C", "currentIndex" : 22},
+        {"in" : "X", "out" : "W", "currentIndex" : 23},
+        {"in" : "Y", "out" : "O", "currentIndex" : 24},
+        {"in" : "Z", "out" : "A", "currentIndex" : 25},
     ]
 ];
-let rotors = [
-    [
-        {"precodedLetter" : "A", "encodedLetter" : "D", "currentIndex" : 0},
-        {"precodedLetter" : "B", "encodedLetter" : "M", "currentIndex" : 1},
-        {"precodedLetter" : "C", "encodedLetter" : "T", "currentIndex" : 2},
-        {"precodedLetter" : "D", "encodedLetter" : "W", "currentIndex" : 3},
-        {"precodedLetter" : "E", "encodedLetter" : "S", "currentIndex" : 4},
-        {"precodedLetter" : "F", "encodedLetter" : "I", "currentIndex" : 5},
-        {"precodedLetter" : "G", "encodedLetter" : "L", "currentIndex" : 6},
-        {"precodedLetter" : "H", "encodedLetter" : "R", "currentIndex" : 7},
-        {"precodedLetter" : "I", "encodedLetter" : "U", "currentIndex" : 8},
-        {"precodedLetter" : "J", "encodedLetter" : "Y", "currentIndex" : 9},
-        {"precodedLetter" : "K", "encodedLetter" : "Q", "currentIndex" : 10},
-        {"precodedLetter" : "L", "encodedLetter" : "N", "currentIndex" : 11},
-        {"precodedLetter" : "M", "encodedLetter" : "K", "currentIndex" : 12},
-        {"precodedLetter" : "N", "encodedLetter" : "F", "currentIndex" : 13},
-        {"precodedLetter" : "O", "encodedLetter" : "E", "currentIndex" : 14},
-        {"precodedLetter" : "P", "encodedLetter" : "J", "currentIndex" : 15},
-        {"precodedLetter" : "Q", "encodedLetter" : "C", "currentIndex" : 16},
-        {"precodedLetter" : "R", "encodedLetter" : "A", "currentIndex" : 17},
-        {"precodedLetter" : "S", "encodedLetter" : "Z", "currentIndex" : 18},
-        {"precodedLetter" : "T", "encodedLetter" : "B", "currentIndex" : 19},
-        {"precodedLetter" : "U", "encodedLetter" : "P", "currentIndex" : 20},
-        {"precodedLetter" : "V", "encodedLetter" : "G", "currentIndex" : 21},
-        {"precodedLetter" : "W", "encodedLetter" : "X", "currentIndex" : 22},
-        {"precodedLetter" : "X", "encodedLetter" : "O", "currentIndex" : 23},
-        {"precodedLetter" : "Y", "encodedLetter" : "H", "currentIndex" : 24},
-        {"precodedLetter" : "Z", "encodedLetter" : "V", "currentIndex" : 25},
-    ],
-    [
-        {"precodedLetter" : "A", "encodedLetter" : "H", "currentIndex" : 0},
-        {"precodedLetter" : "B", "encodedLetter" : "Q", "currentIndex" : 1},
-        {"precodedLetter" : "C", "encodedLetter" : "Z", "currentIndex" : 2},
-        {"precodedLetter" : "D", "encodedLetter" : "G", "currentIndex" : 3},
-        {"precodedLetter" : "E", "encodedLetter" : "P", "currentIndex" : 4},
-        {"precodedLetter" : "F", "encodedLetter" : "J", "currentIndex" : 5},
-        {"precodedLetter" : "G", "encodedLetter" : "T", "currentIndex" : 6},
-        {"precodedLetter" : "H", "encodedLetter" : "M", "currentIndex" : 7},
-        {"precodedLetter" : "I", "encodedLetter" : "O", "currentIndex" : 8},
-        {"precodedLetter" : "J", "encodedLetter" : "B", "currentIndex" : 9},
-        {"precodedLetter" : "K", "encodedLetter" : "L", "currentIndex" : 10},
-        {"precodedLetter" : "L", "encodedLetter" : "N", "currentIndex" : 11},
-        {"precodedLetter" : "M", "encodedLetter" : "C", "currentIndex" : 12},
-        {"precodedLetter" : "N", "encodedLetter" : "I", "currentIndex" : 13},
-        {"precodedLetter" : "O", "encodedLetter" : "F", "currentIndex" : 14},
-        {"precodedLetter" : "P", "encodedLetter" : "D", "currentIndex" : 15},
-        {"precodedLetter" : "Q", "encodedLetter" : "Y", "currentIndex" : 16},
-        {"precodedLetter" : "R", "encodedLetter" : "A", "currentIndex" : 17},
-        {"precodedLetter" : "S", "encodedLetter" : "W", "currentIndex" : 18},
-        {"precodedLetter" : "T", "encodedLetter" : "V", "currentIndex" : 19},
-        {"precodedLetter" : "U", "encodedLetter" : "E", "currentIndex" : 20},
-        {"precodedLetter" : "V", "encodedLetter" : "U", "currentIndex" : 21},
-        {"precodedLetter" : "W", "encodedLetter" : "S", "currentIndex" : 22},
-        {"precodedLetter" : "X", "encodedLetter" : "R", "currentIndex" : 23},
-        {"precodedLetter" : "Y", "encodedLetter" : "K", "currentIndex" : 24},
-        {"precodedLetter" : "Z", "encodedLetter" : "X", "currentIndex" : 25},
-    ],
-    [
-        {"precodedLetter" : "A", "encodedLetter" : "U", "currentIndex" : 0},
-        {"precodedLetter" : "B", "encodedLetter" : "Q", "currentIndex" : 1},
-        {"precodedLetter" : "C", "encodedLetter" : "N", "currentIndex" : 2},
-        {"precodedLetter" : "D", "encodedLetter" : "T", "currentIndex" : 3},
-        {"precodedLetter" : "E", "encodedLetter" : "L", "currentIndex" : 4},
-        {"precodedLetter" : "F", "encodedLetter" : "S", "currentIndex" : 5},
-        {"precodedLetter" : "G", "encodedLetter" : "Z", "currentIndex" : 6},
-        {"precodedLetter" : "H", "encodedLetter" : "F", "currentIndex" : 7},
-        {"precodedLetter" : "I", "encodedLetter" : "M", "currentIndex" : 8},
-        {"precodedLetter" : "J", "encodedLetter" : "R", "currentIndex" : 9},
-        {"precodedLetter" : "K", "encodedLetter" : "E", "currentIndex" : 10},
-        {"precodedLetter" : "L", "encodedLetter" : "H", "currentIndex" : 11},
-        {"precodedLetter" : "M", "encodedLetter" : "D", "currentIndex" : 12},
-        {"precodedLetter" : "N", "encodedLetter" : "P", "currentIndex" : 13},
-        {"precodedLetter" : "O", "encodedLetter" : "X", "currentIndex" : 14},
-        {"precodedLetter" : "P", "encodedLetter" : "K", "currentIndex" : 15},
-        {"precodedLetter" : "Q", "encodedLetter" : "I", "currentIndex" : 16},
-        {"precodedLetter" : "R", "encodedLetter" : "B", "currentIndex" : 17},
-        {"precodedLetter" : "S", "encodedLetter" : "V", "currentIndex" : 18},
-        {"precodedLetter" : "T", "encodedLetter" : "Y", "currentIndex" : 19},
-        {"precodedLetter" : "U", "encodedLetter" : "G", "currentIndex" : 20},
-        {"precodedLetter" : "V", "encodedLetter" : "J", "currentIndex" : 21},
-        {"precodedLetter" : "W", "encodedLetter" : "C", "currentIndex" : 22},
-        {"precodedLetter" : "X", "encodedLetter" : "W", "currentIndex" : 23},
-        {"precodedLetter" : "Y", "encodedLetter" : "O", "currentIndex" : 24},
-        {"precodedLetter" : "Z", "encodedLetter" : "A", "currentIndex" : 25},
-    ]
-];
-let rotorsCounter = new Array(rotors.length);
 
+let rotors = [];
+
+const reverseCylinder = [
+    {"in":"A", "out": "Y"},
+    {"in":"B", "out": "R"},
+    {"in":"C", "out": "U"},
+    {"in":"D", "out": "H"},
+    {"in":"E", "out": "Q"},
+    {"in":"F", "out": "S"},
+    {"in":"G", "out": "L"},
+    {"in":"I", "out": "P"},
+    {"in":"J", "out": "X"},
+    {"in":"K", "out": "N"},
+    {"in":"M", "out": "O"},
+    {"in":"T", "out": "Z"},
+    {"in":"V", "out": "W"}
+];
+
+let rotorsCounter = new Array(rotors.length);
 
 function encodeLetterViaRotor(rotorId, letter) {
     const currentRotor = rotors[rotorId];
-    const encodedLetter = currentRotor.filter(l => l.precodedLetter === letter);
-    return encodedLetter[0]["encodedLetter"];
+    const encodedLetter = currentRotor.filter(l => l.in === letter);
+    return encodedLetter[0].out;
 }
+
 function decodeLetterViaRotor(rotorId, letter) {
     const currentRotor = rotors[rotorId];
-    const decodedLetter = currentRotor.filter(l => l.encodedLetter === letter);
-    return decodedLetter[0]["precodedLetter"];
+    const decodedLetter = currentRotor.filter(l => l.out === letter);
+    return decodedLetter[0].in;
+}
+
+function manipulateViaReverseCylinder(letter) {
+    let tmp = reverseCylinder.filter(l => l.in === letter);
+    if (tmp.length > 0) {
+        return tmp[0].out;
+    } else {
+        tmp = reverseCylinder.filter(l => l.out === letter);
+        return tmp[0].in;
+    }
 }
 
 function resetRotorsCounter() {
@@ -193,23 +136,23 @@ function resetRotorsCounter() {
 function changeRotorsAssignment(rotorId, direction) {
     let newRotor = rotors[rotorId];
     if (direction === "forward") {
-        const tmpEncodedLetter = newRotor[newRotor.length - 1]["encodedLetter"];
+        const tmpEncodedLetter = newRotor[newRotor.length - 1]["out"];
         const tmpLetterIndex = newRotor[newRotor.length - 1]["currentIndex"];
         for (let i = newRotor.length - 1; i > 0; i--) {
-            newRotor[i]["encodedLetter"] = newRotor[i - 1]["encodedLetter"];
+            newRotor[i]["out"] = newRotor[i - 1]["out"];
             newRotor[i]["currentIndex"] = newRotor[i - 1]["currentIndex"];
         }
-        newRotor[0]["encodedLetter"] = tmpEncodedLetter;
+        newRotor[0]["out"] = tmpEncodedLetter;
         newRotor[0]["currentIndex"] = tmpLetterIndex;
     }
     if (direction === "back") {
-        const tmpEncodedLetter = newRotor[0]["encodedLetter"];
+        const tmpEncodedLetter = newRotor[0]["out"];
         const tmpLetterIndex = newRotor[0]["currentIndex"];
         for (let i = 0 ; i < newRotor.length - 1; i++) {
-            newRotor[i]["encodedLetter"] = newRotor[i + 1]["encodedLetter"];
+            newRotor[i]["out"] = newRotor[i + 1]["out"];
             newRotor[i]["currentIndex"] = newRotor[i + 1]["currentIndex"];
         }
-        newRotor[newRotor.length - 1]["encodedLetter"] = tmpEncodedLetter;
+        newRotor[newRotor.length - 1]["out"] = tmpEncodedLetter;
         newRotor[newRotor.length - 1]["currentIndex"] = tmpLetterIndex;
     }
     rotors[rotorId] = newRotor;
@@ -238,7 +181,7 @@ function rotateRotors(direction) {
 function generateRotorSequence(rotorId) {
     let rotorString = "";
     for (let i = 0; i < rotors[rotorId].length; i++) {
-        rotorString += rotors[rotorId][i]["encodedLetter"];
+        rotorString += rotors[rotorId][i]["out"];
     }
     return rotorString;
 }

@@ -20,59 +20,28 @@
                 <input type="text" id="message" placeholder="Here you will have encrypted message" onclick="copyToClipboard('#message')" readonly/>
                 <button class="btn btn-warning" id="resetCrossButton" onclick="resetCross()">Reset cross panel</button>
                 <button class="btn btn-warning" id="resetRotorsButton" onclick="resetRotors()">Reset rotors</button>
-                <button class="btn btn-success" id="startEncodingButton" onclick="startEncoding()">Start encoding</button>
-                <button class="btn btn-danger" id="stopEncodingButton" onclick="stopEncoding()">Stop encoding</button>
-                <button class="btn btn-success" id="startDecodingButton" onclick="startDecoding()">Start decoding</button>
-                <button class="btn btn-danger" id="stopDecodingButton" onclick="stopDecoding()">Stop decoding</button>
             </div>
         </div>
         <div class="keyboard">
-            <div class="row first-row">
-                <div class="col-12">
-                    <button class="keyboard-key" id="Q" disabled>Q</button>
-                    <button class="keyboard-key" id="W" disabled>W</button>
-                    <button class="keyboard-key" id="E" disabled>E</button>
-                    <button class="keyboard-key" id="R" disabled>R</button>
-                    <button class="keyboard-key" id="T" disabled>T</button>
-                    <button class="keyboard-key" id="Y" disabled>Y</button>
-                    <button class="keyboard-key" id="U" disabled>U</button>
-                    <button class="keyboard-key" id="I" disabled>I</button>
-                    <button class="keyboard-key" id="O" disabled>O</button>
-                    <button class="keyboard-key" id="P" disabled>P</button>
+            <div class="row">
+                <div class="col-6 offset-3">
+                    <div class="row">
+                        <div id="keyboard-row-1" class="col-12"></div>
+                    </div>
+                    <div class="row">
+                        <div id="keyboard-row-2" class="col-12"></div>
+                    </div>
+                    <div class="row">
+                        <div id="keyboard-row-3" class="col-12"></div>
+                    </div>
                 </div>
-            </div>
-            <div class="row second-row">
-                <div class="col-12">
-                    <button class="keyboard-key" id="A" disabled>A</button>
-                    <button class="keyboard-key" id="S" disabled>S</button>
-                    <button class="keyboard-key" id="D" disabled>D</button>
-                    <button class="keyboard-key" id="F" disabled>F</button>
-                    <button class="keyboard-key" id="G" disabled>G</button>
-                    <button class="keyboard-key" id="H" disabled>H</button>
-                    <button class="keyboard-key" id="J" disabled>J</button>
-                    <button class="keyboard-key" id="K" disabled>K</button>
-                    <button class="keyboard-key" id="L" disabled>L</button>
-                </div>
-            </div>
-            <div class="row third-row">
-                <div class="col-12">
-                    <button class="keyboard-key" id="Z" disabled>Z</button>
-                    <button class="keyboard-key" id="X" disabled>X</button>
-                    <button class="keyboard-key" id="C" disabled>C</button>
-                    <button class="keyboard-key" id="V" disabled>V</button>
-                    <button class="keyboard-key" id="B" disabled>B</button>
-                    <button class="keyboard-key" id="N" disabled>N</button>
-                    <button class="keyboard-key" id="M" disabled>M</button>
+                <div class="col-3 turn-on-button">
+                    <button id="onOffButton" onclick="startStopEnigma()"></button>
                 </div>
             </div>
         </div>
         <div class="options">
             <div class="row">
-                <div class="col-6 cable-cross">
-                    <svg id="crossPanel" height="250" width="100%">
-
-                    </svg>
-                </div>
                 <div class="col-3 cable-cross">
                     <table class="table table-striped">
                         <thead>

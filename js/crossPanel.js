@@ -114,7 +114,6 @@ function generateLettersOnSVG() {
                 "stroke": "white",
                 "stroke-width": 3,
                 "fill": "black",
-                "onMo"
             });
             let newLetter = document.createElementNS("http://www.w3.org/2000/svg", "text");
             newLetter.id = "crossLetter-" + keyboardLayout[i-1][j-1];
@@ -136,7 +135,7 @@ function changePosition(inputId) {
     let y = 0;
     $(inputId).onmousemove(function () {
         $(inputId).attr({
-            "cx":
+            "cx": "a"
         });
     });
 }
