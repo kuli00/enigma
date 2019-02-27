@@ -85,6 +85,13 @@ const rotorsTemplate = [
     ]
 ];
 
+class Rotor {
+    constructor(rotorId) {
+        this.id = rotorId;
+        this.values = JSON.parse(JSON.stringify( rotorsTemplate[rotorId]));
+    }
+}
+
 let rotors = [];
 
 const reverseCylinder = [

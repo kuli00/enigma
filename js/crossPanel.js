@@ -94,48 +94,97 @@ function removePair(inputId) {
     $(inputId).val("");
 }
 
-function generateLettersOnSVG() {
-    for (let i = 1; i <= keyboardLayout.length; i++) {
-        for (let j = 1; j <= keyboardLayout[i-1].length; j++) {
-            let newCircle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
-            newCircle.id = "crossCircle-" + keyboardLayout[i-1][j-1];
-            $("#crossPanel").append(newCircle);
-            /*
-            newElement.setAttribute("cx", j*25);
-            newElement.setAttribute("cy", i*25);
-            newElement.setAttribute("r", 10);
-            newElement.setAttribute("stroke", "white");
-            newElement.setAttribute("stroke-width", 3);
-            newElement.setAttribute("fill", "black"); */
-            $("#crossCircle-" + keyboardLayout[i-1][j-1]).attr({
-                "cx": j * 75,
-                "cy": i * 75,
-                "r": 21,
-                "stroke": "white",
-                "stroke-width": 3,
-                "fill": "black",
-            });
-            let newLetter = document.createElementNS("http://www.w3.org/2000/svg", "text");
-            newLetter.id = "crossLetter-" + keyboardLayout[i-1][j-1];
-            $("#crossPanel").append(newLetter);
-            $("#crossLetter-" + keyboardLayout[i-1][j-1]).attr({
-                "x": j * 75 - 6,
-                "y": i * 75 + 6,
-                "font-family": "Verdana",
-                "font-size": 20,
-                "fill": "white"
-            });
-            $("#crossLetter-" + keyboardLayout[i-1][j-1])[0].innerHTML = keyboardLayout[i-1][j-1];
+class CrossPanel {
+    constructor() {
+        this.pairs = [];
+    }
+
+    addPair(letter1, letter2) {
+        this.pairs.push([letter1, letter2]);
+    }
+
+    removePair(pairId) {
+        this.pairs.splice(pairId, 1);
+    }
+
+    findPair(letter) {
+        const pairId = this.findPairId(letter);
+        return this.pairs[pairId];
+    }
+
+    findPairId(letter) {
+        for (let i = 0; i < this.pairs; i++) {
+            if (this.pairs[i][0] === letter || this.pairs[i][1] === letter) {
+                return i;
+            }
+        }
+        return false;
+    }
+
+    findConflict(letter) {
+        for (let i = 0; i < this.pairs.length; i++) {
+            if (this.pairs[i][0] === letter || this.pairs[i][1] === letter) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    updateCrossPanelUI() {
+        this.clearCrossPanelUI();
+        for (let i = 0; i < this.pairs; i++) {
+            $("#precross-" + this.pairs[i][0]).val(this.pairs[i][1]);
+            $("#precross-" + this.pairs[i][1]).val(this.pairs[i][0]);
         }
     }
-}
 
-function changePosition(inputId) {
-    let x = 0;
-    let y = 0;
-    $(inputId).onmousemove(function () {
-        $(inputId).attr({
-            "cx": "a"
-        });
-    });
+    clearCrossPanel() {
+        this.pairs = [];
+        this.clearCrossPanelUI();
+    }
+
+    clearCrossPanelUI() {
+        for (let i = 0; i < letters.length; i++) {
+            $("#cross-" + letters[i]).val("");
+        }
+    }
+
+    updateCrossPanelFromPattern(crossArray) {
+        for (let i = 0; i < crossArray.length; i++) {
+            this.addPair(crossArray[i][0], crossArray[i][1]);
+        }
+    }
+
+    generateCrossPanelUI() {
+        for (let i = 0; i < letters.length; i++) {
+            let newCrossTableInputPrecross = document.createElement("INPUT");
+            newCrossTableInputPrecross.id = "precross-" + letters[i];
+            newCrossTableInputPrecross.className = "cross-input";
+            newCrossTableInputPrecross.setAttribute("type", "text");
+            newCrossTableInputPrecross.setAttribute("value", letters[i]);
+            newCrossTableInputPrecross.setAttribute("disabled", "true");
+
+            let newCrossTableCellPrecross = document.createElement("TD");
+            newCrossTableCellPrecross.appendChild(newCrossTableInputPrecross);
+
+            let newCrossTableInputCross = document.createElement("INPUT");
+            newCrossTableInputCross.id = "cross-" + letters[i];
+            newCrossTableInputCross.className = "cross-input";
+            newCrossTableInputCross.setAttribute("type", "text");
+
+            let newCrossTableCellCross = document.createElement("TD");
+            newCrossTableCellCross.appendChild(newCrossTableInputCross);
+
+            let newCrossTableRow = document.createElement("TR");
+            newCrossTableRow.appendChild(newCrossTableCellPrecross);
+            newCrossTableRow.appendChild(newCrossTableCellCross);
+
+            if (i < 13) {
+                $("#tbody1").append(newCrossTableRow);
+            } else {
+                $("#tbody2").append(newCrossTableRow);
+            }
+        }
+    }
+
 }

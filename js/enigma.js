@@ -27,13 +27,7 @@ $(document).ready(function (){
 
 $(document).keydown(function (e) {
     if (captureKeys && getKeyLetter(e) !== false) {
-        let newLetter;
-        if(codingWay === "encode") {
-            newLetter = encodeLetter(getKeyLetter(e));
-        }
-        if(codingWay === "decode") {
-            newLetter = decodeLetter(getKeyLetter(e));
-        }
+        let newLetter = encodeLetter(getKeyLetter(e));
         changeKeyboardButtonHighlight(getButtonId(newLetter), true);
     }
 });
@@ -54,6 +48,8 @@ $(document).keyup(function (e) {
     }
 });
 
+
+
 function updateCodingWay(direction) {
     codingWay = direction;
 }
@@ -69,34 +65,6 @@ function startEncoding() {
 function stopEncoding() {
     resetRotors();
     changeConfigurationFieldsStatus();
-    captureKeys = false;
-}
-
-function startDecoding() {
-    if(checkPatternCode()) {
-        resetMessage();
-        $("textarea").attr("readonly", true);
-        changeConfigurationFieldsStatus();
-        $("#startDecodingButton").css("display", "none");
-        $("#startEncodingButton").css("display", "none");
-        $("#stopDecodingButton").css("display", "inline");
-        fillInputsFromPattern();
-        captureKeys = true;
-        updateCodingWay("decode");
-    } else {
-        alert("Your pattern is invalid");
-        $("#patternCode").val("");
-    }
-
-}
-
-function stopDecoding() {
-    resetRotors();
-    changeConfigurationFieldsStatus();
-    $("#startDecodingButton").css("display", "inline");
-    $("#startEncodingButton").css("display", "inline");
-    $("#stopDecodingButton").css("display", "none");
-    $("textarea").attr("readonly", false);
     captureKeys = false;
 }
 
@@ -146,8 +114,7 @@ function encodeLetter(keyLetter) {
 }
 
 function decodeLetter(keyLetter) {
-    let currentLetter = keyLetter;
-    currentLetter = decodeLetterViaCross(currentLetter);
+    let currentLetter = decodeLetterViaCross(keyLetter);
     for (let i = 0; i < rotors.length; i++) {
         currentLetter = encodeLetterViaRotor(i, currentLetter);
     }

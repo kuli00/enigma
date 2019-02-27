@@ -32,3 +32,13 @@ const keyboardLayout = [
     ["A", "S", "D", "F", "G", "H", "J", "K", "L"],
     ["Z", "X", "C", "V", "B", "N", "M"],
 ];
+
+const letters = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
+
+    function showkeys() {
+    let str = "[";
+    for (let i = 0; i < keyCodes.length; i++) {
+        str = str + '\"' + keyCodes[i].letter + '\", ';
+    }
+    console.log(str);
+}

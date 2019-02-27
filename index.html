@@ -6,10 +6,12 @@
     <link rel="stylesheet" type="text/css" href="css/style.css" />
     <script src="js/jquery-3.3.1.min.js"></script>
     <script src="js/enigma.js"></script>
+    <script src="jsObj/enigma-build.js"></script>
     <script src="js/keyCodes.js"></script>
     <script src="js/crossPanel.js"></script>
     <script src="js/rotors.js"></script>
     <script src="js/codePattern.js"></script>
+    <script src="jsObj/button.js"></script>
     <title>Enigma encode</title>
 </head>
 <body>
@@ -35,7 +37,7 @@
                         <div id="keyboard-row-3" class="col-12"></div>
                     </div>
                 </div>
-                <div class="col-3 turn-on-button">
+                <div id="onOffButtonDiv" class="col-3 turn-on-button">
                     <button id="onOffButton" onclick="startStopEnigma()"></button>
                 </div>
             </div>
@@ -50,7 +52,7 @@
                             <th scope="col">Crossed letter</th>
                         </tr>
                         </thead>
-                        <tbody>
+                        <tbody id="tbody1">
                         <tr>
                             <td><input class="cross-input" type="text" value="A" id="precross-A" disabled /></td>
                             <td><input class="cross-input" type="text" id="cross-A"/></td>
@@ -114,7 +116,7 @@
                             <th scope="col">Crossed letter</th>
                         </tr>
                         </thead>
-                        <tbody>
+                        <tbody id="tbody2">
                         <tr>
                             <td><input class="cross-input" type="text" value="N" id="precross-N" disabled /></td>
                             <td><input class="cross-input" type="text" id="cross-N"/></td>
